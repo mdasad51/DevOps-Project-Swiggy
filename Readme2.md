@@ -79,7 +79,17 @@ docker run -itd --name SonarQube-Server -p 9000:9000 sonarqube:lts-community
 ## Now, configure SonarQube with Jenkins using a webhook
 
 - **First, we will create a webhook in SonarQube**
+
+  ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20170046.png?raw=true)
+  
 - **After that, we will generate a token, which will be used in Jenkins credentials**
+  ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20170147.png?raw=true)
+
+  - **Now add this token on jenkins system**
+    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20183303.png?raw=true)
+
+  - **Then add in tools section**
+    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20183303.png?raw=true)
 
 ## * Trivy Installation
 ```
@@ -133,8 +143,9 @@ sudo apt-get install trivy -y
     ```
       kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
     ```
+    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20190120.png?raw=true)
 
-    ## 4. Now, set up Jenkins
+    
 
 
   
