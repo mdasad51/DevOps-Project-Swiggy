@@ -5,8 +5,13 @@
 
 first create a resource group on azure.
 
-
+![image alt ](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20104807.png?raw=true)
 I created a resource group named Jenkins.
+
+## Now, create a virtual machine (VM)
+i created a vm named 'master'
+
+The VM should have at least 2 vCPUs and 8 GiB of memory
 
 ## 2. After that, I created an AKS cluster
 
