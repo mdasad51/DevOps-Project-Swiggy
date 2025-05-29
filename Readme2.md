@@ -56,10 +56,30 @@ sudo apt-get update
 sudo apt-get install jenkins
 ```
 
+## * Now, set up Jenkins
+
+  - **install some plugins**
+     - **Pipeline Stage View Version 2.38**
+  - **First, add port 8080 on the VM**
+    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20163730.png?raw=true)
+    
+  - **Now, copy the public IP of the VM and search it in the browser by adding :8080 at the end**
+    
+
+  - **After that, Jenkins will ask you for a password**
+    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20164157.png?raw=true)
+
+  - **Find password using given path**
+     ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20164137.png?raw=true)
+
 ## * SonarQube Installation
 ```
 docker run -itd --name SonarQube-Server -p 9000:9000 sonarqube:lts-community
 ```
+## Now, configure SonarQube with Jenkins using a webhook
+
+- **First, we will create a webhook in SonarQube**
+- **After that, we will generate a token, which will be used in Jenkins credentials**
 
 ## * Trivy Installation
 ```
