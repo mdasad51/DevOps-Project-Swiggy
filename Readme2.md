@@ -1,6 +1,12 @@
-# Swiggy Clone Deployment using CI/CD 
+# Swiggy Clone Deployment using CI/CD
+![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-28%20224545.png?raw=true)
 
 ## 1. Deploy a Vm on azure (I took a VM from Azure; you can also take a VM from any cloud provider.)
+
+first create a resource group on azure.
+
+
+I created a resource group named Jenkins.
 
 ## 2. After that, I created an AKS cluster
 
@@ -96,7 +102,8 @@ sudo apt-get install trivy -y
     ```
       kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
     ```
-    
+
+    ## 4. Now, set up Jenkins
 
 
   
