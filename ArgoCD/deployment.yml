@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: swiggy-app
-        image: manlineroot12/swiggy-app:latest
+        image: asadkhan03/swiggy-img:replaceImageTag
         imagePullPolicy: "Always"
         ports:
         - containerPort: 3000
