@@ -3,15 +3,21 @@
 
 ## 1. Deploy a Vm on azure (I took a VM from Azure; you can also take a VM from any cloud provider.)
 
-first create a resource group on azure.
+- **first create a resource group on azure.**
 
 ![image alt ](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20104807.png?raw=true)
-I created a resource group named Jenkins.
+
+- **I created a resource group named Jenkins.**
 
 ## Now, create a virtual machine (VM)
-i created a vm named 'master'
 
-The VM should have at least 2 vCPUs and 8 GiB of memory
+- **i created a vm named 'master'**
+ 
+![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20105234.png?raw=true)
+
+- **The VM should have at least 2 vCPUs and 8 GiB of memory**
+
+![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20105254.png?raw=true)
 
 ## 2. After that, I created an AKS cluster
 
