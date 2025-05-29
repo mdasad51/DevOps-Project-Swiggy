@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: swiggy-app
-        image: asadkhan03/swiggy-app-img:4
+        image: asadkhan03/swiggy-app-img:replaceImageTag
         ports:
         - containerPort: 3000
