@@ -1,74 +1,73 @@
-pipeline{
+pipeline {
     agent any
-    tools{
-        jdk 'jdk17'
-        nodejs 'node23'
-    }
     environment {
-        SCANNER_HOME=tool 'sonar-scanner'
+        SONAR_HOME = tool "sonar"
+        GIT_REPO_NAME = "DevOps-Project-Swiggy"
+        GIT_USER_NAME = "mdasad1270"
     }
     stages {
-        stage('clean workspace'){
-            steps{
+        stage("Clean Workspace") {
+            steps {
                 cleanWs()
+                echo "Clean workspace"
             }
         }
-        stage('Checkout from Git'){
-            steps{
-                git 'https://github.com/KastroVKiran/DevOps-Project-Swiggy.git'
+        stage("Code Checkout") {
+            steps {
+                git url: "https://github.com/mdasad1270/DevOps-Project-Swiggy.git", branch: "master"
             }
         }
-        stage("Sonarqube Analysis "){
-            steps{
-                withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Swiggy \
-                    -Dsonar.projectKey=Swiggy '''
+        stage("Sonarqube Analysis") {
+            steps {
+                withSonarQubeEnv("sonar") {
+                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=swiggy -Dsonar.projectKey=swiggy"
                 }
             }
         }
-        stage("quality gate"){
-           steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
-                }
-            } 
-        }
-        stage('Install Dependencies') {
+        stage("Quality Gate") {
             steps {
-                sh "npm install"
+                waitForQualityGate abortPipeline: false, credentialsId: 'Sonar'
             }
         }
-        stage('OWASP FS SCAN') {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
-        stage('TRIVY FS SCAN') {
+        stage("TRIVY FS SCAN") {
             steps {
                 sh "trivy fs . > trivyfs.txt"
             }
         }
-        stage("Docker Build & Push"){
-            steps{
-                script{
-                   withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker'){   
-                       sh "docker build -t swiggy ."
-                       sh "docker tag swiggy kastrov/swiggy:latest "
-                       sh "docker push kastrov/swiggy:latest "
-                    }
+        stage("Image Build") {
+            steps {
+                sh "docker build -t swiggy-app-img ."
+            }
+        }
+        stage("Image Push to Docker Hub") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "docker", passwordVariable: "dockerPass", usernameVariable: "dockerUser")]) {
+                    sh "docker login -u ${env.dockerUser} -p ${env.dockerPass}"
+                    sh "docker tag swiggy-app-img:latest ${env.dockerUser}/swiggy-app-img:${BUILD_NUMBER}"
+                    sh "docker push ${env.dockerUser}/swiggy-app-img:${BUILD_NUMBER}"
                 }
             }
         }
-        stage("TRIVY"){
-            steps{
-                sh "trivy image kastrov/swiggy:latest > trivy.txt" 
+        stage("Image Scan") {
+            steps {
+                sh "trivy image asadkhan03/swiggy-app-img:latest > trivy.txt"
             }
         }
-        stage('Deploy to container'){
-            steps{
-                sh 'docker run -d --name swiggy -p 3000:3000 kastrov/swiggy:latest'
+        stage("Update Image Tag") {
+            steps {
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                    sh '''
+                        git config user.email "asadkhan.@gmail.com"
+                        git config user.name "Asad Khan"
+                        BUILD_NUMBER=${BUILD_NUMBER}
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ArgoCD/deployment.yml
+                        git add ArgoCD/deployment.yml
+                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                    '''
+                }
             }
         }
     }
 }
+
