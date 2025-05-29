@@ -14,7 +14,6 @@ spec:
       labels:
         app: swiggy-app
     spec:
-      terminationGracePeriodSeconds: 30
       containers:
       - name: swiggy-app
         image: manlineroot12/swiggy-app:latest
