@@ -1,27 +1,37 @@
 # Swiggy Clone Deployment using CI/CD
-![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-28%20224545.png?raw=true)
+   ---
+   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-28%20224545.png?raw=true)
+  
 
 ## 1. Deploy a Vm on azure (I took a VM from Azure; you can also take a VM from any cloud provider.)
-
+ ---
 - **first create a resource group on azure.**
+---
 
 ![image alt ](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20104807.png?raw=true)
 
 - **I created a resource group named Jenkins.**
+   ---
 
-## Now, create a virtual machine (VM)
-
+ ## Now, create a virtual machine (VM)
+  ---
+  
 - **i created a vm named 'master'**
+
+   ---
  
 ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20105234.png?raw=true)
 
 - **The VM should have at least 2 vCPUs and 8 GiB of memory**
+   ---
 
 ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20105254.png?raw=true)
 
 ## 2. After that, I created an AKS cluster
+ ---
 
 ## 3.Now Install all Required Tools (Install all tools on your Master Machine)
+   ---
    - **Docker**
    - **Jenkins**
    - **SonarQube**
@@ -30,6 +40,7 @@
 
 
   ## * Docker Installation
+  ---
   To install Docker, run these commands it will update your system and install docker
   ```
   sudo apt update
@@ -60,16 +71,22 @@ sudo apt-get install jenkins
 
   - **install some plugins**
      - **Pipeline Stage View Version 2.38**
+     - **SonarQubeScanner**
+     - **SonarQualityGate**
   - **First, add port 8080 on the VM**
+    ---
     ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20163730.png?raw=true)
     
   - **Now, copy the public IP of the VM and search it in the browser by adding :8080 at the end**
+     ---
     
 
   - **After that, Jenkins will ask you for a password**
+     ---
     ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20164157.png?raw=true)
 
   - **Find password using given path**
+     ---
      ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20164137.png?raw=true)
 
 ## * SonarQube Installation
@@ -77,15 +94,17 @@ sudo apt-get install jenkins
 docker run -itd --name SonarQube-Server -p 9000:9000 sonarqube:lts-community
 ```
 ## Now, configure SonarQube with Jenkins using a webhook
-
+ ---
 - **First, we will create a webhook in SonarQube**
-
+ ---
   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20170046.png?raw=true)
   
 - **After that, we will generate a token, which will be used in Jenkins credentials**
+   ---
   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20170147.png?raw=true)
 
   - **Now add this token on jenkins system**
+     ---
     ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20183303.png?raw=true)
 
   - **Then add in tools section**
@@ -146,42 +165,56 @@ sudo apt-get install trivy -y
     ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20190120.png?raw=true)
 
 ## * Now, create the Jenkins pipeline
+---
 
   - **I have already added the **Jenkinsfile** in the project's repository.**
 
     
 
 ## * Finally, I setup the CD (Continuous Deployment) part using ArgoCD
+ ---
    - **Create project on ArgoCD**
+      ---
       - **Give Application name and project name**
+         ---
          ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20192011.png?raw=true)
       - **Now give repository url and path**
+         ---
           ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20192451.png?raw=true)
       - **And finally, provide the cluster URL and namespace**
+         ---
           ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20192510.png?raw=true)
 
 
 ## * Now, run the Jenkins pipeline (CI Part)
-
-     ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20194924.png?raw=true)
+   ---
+   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20194924.png?raw=true)
 
   - **This is the SonarQube dashboard, which is showing the code analysis report**
+     ---
        ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20194117.png?raw=true)
 
 ## * Finally, the application was deployed to the AKS cluster using ArgoCD (CD Part)
+---
    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202104.png?raw=true)
     
+
+---
    - **All the pods are running properly**
+
       ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202122.png?raw=true)
 
-## * The Trivy image and file scanning reports are in trivyfs.txt and trivy.txt
-   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202821.png?raw=true)
 
-   # Now the application will run
+## * The Trivy image and file scanning reports are in trivyfs.txt and trivy.txt
+---
+   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202821.png?raw=true)
+   
+   # * Now the application will run
+   ---
    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202256.png?raw=true)
    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202314.png?raw=true)
    ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202330.png?raw=true)
-        
+    --- 
 
   
 
