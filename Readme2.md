@@ -145,8 +145,43 @@ sudo apt-get install trivy -y
     ```
     ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20190120.png?raw=true)
 
+## * Now, create the Jenkins pipeline
+
+  - **I have already added the **Jenkinsfile** in the project's repository.**
+
     
 
+## * Finally, I setup the CD (Continuous Deployment) part using ArgoCD
+   - **Create project on ArgoCD**
+      - **Give Application name and project name**
+         ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20192011.png?raw=true)
+      - **Now give repository url and path**
+          ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20192451.png?raw=true)
+      - **And finally, provide the cluster URL and namespace**
+          ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20192510.png?raw=true)
+
+
+## * Now, run the Jenkins pipeline (CI Part)
+
+     ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20194924.png?raw=true)
+
+  - **This is the SonarQube dashboard, which is showing the code analysis report**
+       ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20194117.png?raw=true)
+
+## * Finally, the application was deployed to the AKS cluster using ArgoCD (CD Part)
+   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202104.png?raw=true)
+    
+   - **All the pods are running properly**
+      ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202122.png?raw=true)
+
+## * The Trivy image and file scanning reports are in trivyfs.txt and trivy.txt
+   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202821.png?raw=true)
+
+   # Now the application will run
+   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202256.png?raw=true)
+   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202314.png?raw=true)
+   ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202330.png?raw=true)
+        
 
   
 
