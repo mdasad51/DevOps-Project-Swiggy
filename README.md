@@ -5,7 +5,7 @@ In this **real-time DevOps project**, I demonstrate how to **deploy a Swiggy Clo
 ---
 ![image alt](https://github.com/mdasad1270/DevOps-Project-Swiggy/blob/master/images/Screenshot%202025-05-29%20202256.png?raw=true)
 
-## 🛠️ Tools & Services Used:
+## 🛠️ Tools  & Services Used:
 
 1. **Terraform** ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=flat-square&logo=terraform&logoColor=white)
 2. **GitHub** ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
