@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Start your Node.js server
-CMD ["npm", "start"]
+CMD  ["npm", "start"]
